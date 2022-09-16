@@ -19,4 +19,4 @@ spec:
             storage: 1Gi
   params:
   - name: repo-url
-    value: "https://github.com/lciamp/tekton-whale"
+    value: "git@github.com:lciamp/tekton-whale.git"

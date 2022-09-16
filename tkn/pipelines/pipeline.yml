@@ -1,9 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
-
 metadata:
   name: clone-read
-
 spec:
   description: Pipeline to clone reop and print README
   params:
@@ -13,7 +11,6 @@ spec:
   workspaces:
   - name: shared-data
     description: used to store repo files for next task
-
   tasks:
   - name: fetch-source
     taskRef: # fetch-source refers to another task called git-clone
@@ -24,3 +21,11 @@ spec:
     params:
     - name: url
       value: $(params.repo-url)
+  - name: show-readme
+    runAfter: ["fetch-source"]
+    taskRef:
+      name: show-readme
+    workspaces:
+    - name: source
+      workspace: shared-data
+      
